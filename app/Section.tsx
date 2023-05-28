@@ -2,7 +2,7 @@
 
 import { Heading } from "@chakra-ui/react";
 import Carousel from "./Carousel";
-import { Item } from "../types";
+import { Item } from "./types";
 
 type SectionProps = {
   title: string;

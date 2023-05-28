@@ -2,9 +2,15 @@
 import { SampleItem } from "../../types";
 import ItemPage from "./ItemPage";
 
-export default function Item({ params }) {
+type ItemProps = {
+  params: Record<string, string>
+}
+
+export default function Item({ params }: ItemProps) {
+  const id = params.id
+
+  // TODO: ping the item/[id] API
   const item = SampleItem
-  // TODO: :(
   return (
     <ItemPage item={item} />
   )

@@ -1,6 +1,6 @@
 "use client"
 
-import { Heading, Text, Image, Stack, Button } from "@chakra-ui/react"
+import { Heading, Text, Image, Stack, Button, Center } from "@chakra-ui/react"
 import { Item } from "../../types"
 
 type ItemPageProps = {
@@ -9,7 +9,13 @@ type ItemPageProps = {
 
 export default function ItemPage({ item }: ItemPageProps) {
   return (
-    <Stack justifyContent="space-between">
+    <Center
+      flexDirection="column"
+      justifyContent="space-between"
+      alignItems="stretch"
+      margin="auto"
+      maxW={600}
+    >
       <Stack>
         <Image borderRadius="lg" src={item.image_link} alt={item.description} />
         <Heading size='md'>{item.name}</Heading>
@@ -19,6 +25,6 @@ export default function ItemPage({ item }: ItemPageProps) {
         <Text>{item.location}</Text>
       </Stack>
       <Button colorScheme="green">Reserve</Button>
-    </Stack>
+    </Center>
   )
 }

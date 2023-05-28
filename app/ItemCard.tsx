@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, CardBody, Stack, Heading, Divider, CardFooter, ButtonGroup, Button, Image, Text } from "@chakra-ui/react"
+import { Card, CardBody, Stack, Heading, Image, Text } from "@chakra-ui/react"
 import { Item } from "./types"
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ type ItemCardProps = {
 export default function ItemCard({ item }: ItemCardProps) {
   return (
     <Link href={`/item/${item.id}`}>
-      <Card size="sm" minW="3xs" maxW="xs" overflow="hidden" m={3}>
+      <Card size="sm" minW="3xs" maxW="xs" overflow="hidden">
         <Image src={item.image_link} alt={item.description} />
         <CardBody>
           <Stack>

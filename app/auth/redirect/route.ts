@@ -1,7 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { store } from '../../../lib/store';
 import { sgidClient } from '../../../lib/sgidClient';
-import { getCookie, setCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -64,5 +62,5 @@ export async function GET(req: Request) {
   };
   store.set(sessionId, updatedSession);
 
-  return NextResponse.redirect(new URL('/logged-in', req.url));
+  return NextResponse.redirect(new URL('/', req.url));
 }

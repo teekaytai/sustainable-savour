@@ -8,7 +8,7 @@ type CarouselProps = {
 
 export default function Carousel({ items }: CarouselProps) {
   return (
-    <Flex flexWrap="nowrap" overflow="auto">
+    <Flex flexWrap="nowrap" overflow="auto" gap={5}>
       { items.map(item => <ItemCard key={item.id} item={item} />) }
     </Flex>
   )

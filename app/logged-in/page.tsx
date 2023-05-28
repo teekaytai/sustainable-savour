@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import useUserInfo from '../auth/useUserInfo';
 
 type UserInfoRes = {
   sub?: string;
@@ -8,25 +9,7 @@ type UserInfoRes = {
 };
 
 const LoggedIn = () => {
-  const [data, setData] = useState<UserInfoRes | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const getUserInfo = async () => {
-      try {
-        setIsLoading(true);
-        const res = await fetch('/auth/userinfo', { credentials: 'include' });
-        const data = (await res.json()) as UserInfoRes;
-        setData(data);
-      } catch (error) {
-        setError(error instanceof Error ? error.message : String(error));
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getUserInfo();
-  }, []);
+  const { data, isLoading, error } = useUserInfo();
 
   if (isLoading) {
     return <div>Loading...</div>;

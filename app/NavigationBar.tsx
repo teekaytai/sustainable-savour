@@ -5,8 +5,7 @@ import Link from "next/link"
 import useUserInfo from "./auth/useUserInfo"
 
 export default function NavigationBar() {
-  const { isLoading, isLoggedIn, data } = useUserInfo();
-  console.log(data)
+  const { isLoading, data } = useUserInfo();
 
   let topRightDisplay;
   if (isLoading) {

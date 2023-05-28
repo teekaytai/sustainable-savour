@@ -1,20 +1,133 @@
-export type Item = {
-  id: number, 
-  name: string,
-  business_id: number,
-  location: string, 
-  start_time: string, 
-  end_time: string, 
-  price: number, 
-  quantity_left: number, 
-  description: string, 
-  image_link: string, 
-  is_halal: boolean, 
-  is_vegetarian: boolean, 
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json }
+  | Json[]
+
+export interface Database {
+  public: {
+    Tables: {
+      businesses: {
+        Row: {
+          created_at: string | null
+          id: number
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          name?: string
+        }
+      }
+      items: {
+        Row: {
+          business_id: number
+          created_at: string | null
+          description: string | null
+          end_time: string | null
+          id: number
+          image_link: string | null
+          is_halal: boolean
+          is_vegetarian: boolean
+          location: string
+          name: string
+          price: number
+          quantity_left: number
+          start_time: string | null
+        }
+        Insert: {
+          business_id: number
+          created_at?: string | null
+          description?: string | null
+          end_time?: string | null
+          id?: number
+          image_link?: string | null
+          is_halal?: boolean
+          is_vegetarian?: boolean
+          location: string
+          name: string
+          price: number
+          quantity_left: number
+          start_time?: string | null
+        }
+        Update: {
+          business_id?: number
+          created_at?: string | null
+          description?: string | null
+          end_time?: string | null
+          id?: number
+          image_link?: string | null
+          is_halal?: boolean
+          is_vegetarian?: boolean
+          location?: string
+          name?: string
+          price?: number
+          quantity_left?: number
+          start_time?: string | null
+        }
+      }
+      reservations: {
+        Row: {
+          created_at: string | null
+          id: number
+          item_id: number | null
+          user_id: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          item_id?: number | null
+          user_id?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          item_id?: number | null
+          user_id?: number | null
+        }
+      }
+      users: {
+        Row: {
+          created_at: string | null
+          id: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+        }
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
 }
 
+export type Item = Database["public"]["Tables"]["items"]["Row"];
+
 export const SampleItem: Item = {
-  id: 1, 
+  id: 1,
+  created_at: null,
   name: "Cwason",
   business_id: 123,
   location: "Location blah", 

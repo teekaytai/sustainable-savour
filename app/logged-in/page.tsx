@@ -42,9 +42,6 @@ const LoggedIn = () => {
       {Object.entries(data?.userInfo ?? {}).map(([field, value]) => (
         <div key={field}>{`${field}: ${value}`}</div>
       ))}
-      {data?.state ? (
-        <div>{`Favourite ice cream flavour: ${data.state}`}</div>
-      ) : null}
     </div>
   );
 };

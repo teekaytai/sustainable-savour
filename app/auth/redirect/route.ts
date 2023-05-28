@@ -1,38 +1,51 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { store } from '../../lib/store';
-import { sgidClient } from '../../lib/sgidClient';
+import { store } from '../../../lib/store';
+import { sgidClient } from '../../../lib/sgidClient';
 import { getCookie, setCookie } from 'cookies-next';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function GET(req: Request) {
   // Retrieve the authorization code from query params
-  let { code, state } = req.query;
+  const { searchParams } = new URL(req.url);
+  const state = searchParams.get('state');
+  let code = searchParams.get('code');
 
   // Retrieve the session ID from browser cookies
-  const sessionId = getCookie('sessionId', { req, res });
+  const sessionId = cookies().get('sessionId')?.value;
 
   // Validating that the sessionID, contents in session, and auth code is present
   if (typeof sessionId !== 'string') {
-    return res.status(401).send('Session ID not found in browser cookies');
+    return NextResponse.json(
+      { message: 'Session ID not found in browser cookies' },
+      { status: 401 }
+    );
   } else if (!code) {
-    return res.status(400).send('Authorization code not found in query params');
+    return NextResponse.json(
+      { message: 'Authorization code not found in query params' },
+      { status: 400 }
+    );
   }
   code = String(code);
 
   const session = store.get(sessionId);
 
   if (!session) {
-    return res.status(401).send('Session not found');
+    return NextResponse.json({ message: 'Session not found' }, { status: 401 });
   } else if (state && state !== session.state) {
-    return res.status(400).send('State does not match');
+    return NextResponse.json(
+      { message: 'State does not match' },
+      { status: 400 }
+    );
   }
 
   const { nonce, codeVerifier } = session;
 
   if (!codeVerifier || typeof codeVerifier !== 'string') {
-    return res.status(400).send('Code verifier not found');
+    return NextResponse.json(
+      { message: 'Code verifier not found' },
+      { status: 400 }
+    );
   }
 
   // Exchange the auth code for the access token
@@ -51,5 +64,5 @@ export default async function handler(
   };
   store.set(sessionId, updatedSession);
 
-  res.redirect('/logged-in');
+  return NextResponse.redirect(new URL('/logged-in', req.url));
 }

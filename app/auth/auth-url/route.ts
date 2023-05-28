@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { v4 as uuidv4 } from 'uuid';
-import { store } from '../../lib/store';
-import { sgidClient } from '../../lib/sgidClient';
-import { setCookie } from 'cookies-next';
+import { store } from '../../../lib/store';
+import { sgidClient } from '../../../lib/sgidClient';
 import { generatePkcePair } from '@opengovsg/sgid-client';
+import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  let { state } = req.query;
-  state = String(state);
+export function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const state = String(searchParams.get('state'));
 
   // Generate a session ID
   const sessionId = uuidv4();
@@ -25,8 +26,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   store.set(sessionId, { state, nonce, codeVerifier });
 
   // Set the sessionID in the browser's cookies
-  setCookie('sessionId', sessionId, { req, res });
+  cookies().set({
+    name: 'sessionId',
+    value: sessionId,
+  });
+  // setCookie('sessionId', sessionId, { req, res });
 
   // Redirect the browser to the authorization URL
-  res.redirect(url);
+  return NextResponse.redirect(url);
 }

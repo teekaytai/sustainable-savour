@@ -10,7 +10,7 @@ type ItemCardProps = {
 
 export default function ItemCard({ item }: ItemCardProps) {
   return (
-    <Link href={`/items/${item.id}`}>
+    <Link href={`/items/${item.id}`} prefetch={false}>
       <Card size="sm" minW="3xs" maxW="xs" overflow="hidden">
         <Image src={item.image_link ?? ''} alt={item.description ?? ''} />
         <CardBody>

@@ -11,8 +11,8 @@ type ReservationsListProps = {
 export default function ReservationsList({ reservations }: ReservationsListProps) {
   return (
     <>
-      <Heading size="lg">My Reservations</Heading>
-      { reservations.length === 0 ? <Text>No reservations yet, make one today!</Text> : null }
+      <Heading size="lg" m={5}>My Reservations</Heading>
+      { reservations.length === 0 ? <Text m={5}>No reservations yet, make one today!</Text> : null }
       <Carousel items={reservations} />
     </>
   )

@@ -15,7 +15,7 @@ export default function NavigationBar() {
   } else {
     topRightDisplay = (
       <Link prefetch={false} href={`/auth/auth-url`}>
-        <Button colorScheme="green">Log in</Button>
+        <Button colorScheme="green" m={4}>Log in</Button>
       </Link>
     )
   }
@@ -23,9 +23,12 @@ export default function NavigationBar() {
   return (
     <Flex p={2} justifyContent="space-between">
       <Flex alignItems="center" gap={3}>
-        <Heading>Sustainable Savour</Heading>
-        <Link href="/"></Link>
-        <Link href="/reserved">My Reservations</Link>
+        <Link href="/">
+          <Heading m={4}>Sustainable Savour</Heading>
+        </Link>
+        <Link href="/reserved">
+          <Button colorScheme="blue">My Reservations</Button>
+        </Link>
       </Flex>
 
       { topRightDisplay }

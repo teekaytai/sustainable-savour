@@ -27,7 +27,7 @@ export interface Database {
         Row: {
           business_id: number
           description: string | null
-          end_time: string | null
+          end_time: string
           id: number
           image_link: string | null
           is_halal: boolean
@@ -36,12 +36,12 @@ export interface Database {
           name: string
           price: number
           quantity_left: number
-          start_time: string | null
+          start_time: string
         }
         Insert: {
           business_id: number
           description?: string | null
-          end_time?: string | null
+          end_time?: string
           id?: number
           image_link?: string | null
           is_halal?: boolean
@@ -50,12 +50,12 @@ export interface Database {
           name: string
           price: number
           quantity_left: number
-          start_time?: string | null
+          start_time?: string
         }
         Update: {
           business_id?: number
           description?: string | null
-          end_time?: string | null
+          end_time?: string
           id?: number
           image_link?: string | null
           is_halal?: boolean
@@ -64,7 +64,7 @@ export interface Database {
           name?: string
           price?: number
           quantity_left?: number
-          start_time?: string | null
+          start_time?: string
         }
       }
       reservations: {

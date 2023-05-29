@@ -26,7 +26,7 @@ export default function Section({ title }: SectionProps) {
 
   return (
     <>
-      <Heading size="lg">{title}</Heading>
+      <Heading size="lg" m={5}>{title}</Heading>
       <Carousel items={items} />
     </>
   )

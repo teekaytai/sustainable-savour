@@ -17,8 +17,8 @@ export default function ItemCard({ item }: ItemCardProps) {
           <Stack>
             <Heading size='md'>{item.name}</Heading>
             <Text>{item.description}</Text>
-            <Text>{item.start_time} - {item.end_time}</Text>
-            <Text color='blue.600' fontSize='lg'>S$ {item.price}</Text>
+            <Text>{new Date(item.start_time).toLocaleString().replace(/\s/g, ' ')} - {new Date(item.end_time).toLocaleString().replace(/\s/g, ' ')}</Text>
+            <Text color='blue.600' fontSize='lg'>S$ {item.price.toFixed(2)}</Text>
           </Stack>
         </CardBody>
       </Card>

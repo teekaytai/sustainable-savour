@@ -27,6 +27,7 @@ export default function useUserInfo() {
     getUserInfo();
   }, []);
 
+
   return {
     data,
     isLoading,

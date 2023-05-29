@@ -17,7 +17,7 @@ export default function ItemPage({ item }: ItemPageProps) {
       maxW={600}
     >
       <Stack>
-        <Image borderRadius="lg" src={item.image_link} alt={item.description} />
+        <Image borderRadius="lg" src={item.image_link ?? ''} alt={item.description ?? ''} />
         <Heading size='md'>{item.name}</Heading>
         <Text>{item.description}</Text>
         <Text>{item.start_time} - {item.end_time}</Text>

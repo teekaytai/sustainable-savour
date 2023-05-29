@@ -1,7 +1,6 @@
 "use client"
 
 import { Heading, Text } from "@chakra-ui/react";
-import ItemCard from "../ItemCard";
 import { Item } from "../types";
 import Carousel from "../Carousel";
 

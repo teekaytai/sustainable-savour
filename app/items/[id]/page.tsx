@@ -10,6 +10,6 @@ export default async function Item({ params }: ItemProps) {
   const item = await fetch(new URL(`/api/items/${id}`, process.env.API_URL)).then(res => res.json());
 
   return (
-    <ItemPage item={item} />
+    <ItemPage item={item} itemId={id} />
   )
 }

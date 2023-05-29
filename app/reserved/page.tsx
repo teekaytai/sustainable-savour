@@ -18,8 +18,10 @@ export default async function Reservations() {
   if (sessionId) {
     const userInfo = await getUserInfo(sessionId)
     const userId = userInfo?.sub
-    if (userId) {
-      reservations = await fetch(new URL(`/api/reservations/${userId}`, process.env.API_URL)).then(res => res.json())
+    if (userId !== undefined) {
+      reservations = await fetch(new URL(`/api/reservations/${userId}`, process.env.API_URL))
+      .then(res => res.json() ?? [])
+      .catch(() => [])
     }
   }
   

@@ -7,7 +7,12 @@ type ItemProps = {
 
 export default async function Item({ params }: ItemProps) {
   const id = params.id
-  const item = await fetch(new URL(`/api/items/${id}`, process.env.API_URL)).then(res => res.json());
+  const item = await
+    fetch(
+      new URL(`/api/items/${id}`, process.env.API_URL),
+      { next: { revalidate: 0 } }
+    )
+    .then(res => res.json());
 
   return (
     <ItemPage item={item} itemId={id} />

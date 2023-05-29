@@ -4,7 +4,7 @@ const sgidClient = new SgidClient({
   clientId: String(process.env.SGID_CLIENT_ID),
   clientSecret: String(process.env.SGID_CLIENT_SECRET),
   privateKey: String(process.env.SGID_PRIVATE_KEY),
-  redirectUri: 'http://localhost:3000/auth/redirect',
+  redirectUri: `${process.env.API_URL}/auth/redirect`,
 });
 
 export { sgidClient };

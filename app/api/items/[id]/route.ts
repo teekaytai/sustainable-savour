@@ -17,7 +17,9 @@ export async function GET(request: NextRequest, { params }: Props) {
   }
   
   if (items?.length) {
-    return NextResponse.json(items[0]);
+    const res = NextResponse.json(items[0]);
+    res.headers.set('Cache-Control', 'no-store, max-age=0');
+    return res;
   } else {
     return NextResponse.json({ error: 'Resource not found' }, { status: 404 });
   }

@@ -10,5 +10,7 @@ export async function GET(request: NextRequest) {
     console.error('Error fetching data:', error.message);
     return NextResponse.json({ error: 'Error fetching data' }, { status: 500 });
   }
-  return NextResponse.json(items);
+  const res = NextResponse.json(items);
+  res.headers.set('Cache-Control', 'no-store, max-age=0');
+  return res;
 }

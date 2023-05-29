@@ -15,5 +15,7 @@ export async function GET(request: NextRequest, { params }: Props) {
     console.error('Error fetching data:', error.message);
     return NextResponse.json({ error: 'Error fetching data' }, { status: 500 });
   }
-  return NextResponse.json(reservations?.map(reservation => reservation.items));
+  const res = NextResponse.json(reservations?.map(reservation => reservation.items));
+  res.headers.set('Cache-Control', 'no-store, max-age=0');
+  return res;
 }

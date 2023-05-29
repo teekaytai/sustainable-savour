@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '../../../lib/supabaseClient';
 
 export async function POST(request: NextRequest) { 
-  const { user_id, item_id } = request.json();
-  // console.log(request.json())
-  // console.log(user_id, item_id)
+  const { user_id, item_id } = await request.json();
   let { error } = await supabase
     .from('reservations')
     .insert([{ user_id, item_id }]);

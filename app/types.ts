@@ -11,17 +11,14 @@ export interface Database {
     Tables: {
       businesses: {
         Row: {
-          created_at: string | null
           id: number
           name: string
         }
         Insert: {
-          created_at?: string | null
           id?: number
           name: string
         }
         Update: {
-          created_at?: string | null
           id?: number
           name?: string
         }
@@ -29,7 +26,6 @@ export interface Database {
       items: {
         Row: {
           business_id: number
-          created_at: string | null
           description: string | null
           end_time: string | null
           id: number
@@ -44,7 +40,6 @@ export interface Database {
         }
         Insert: {
           business_id: number
-          created_at?: string | null
           description?: string | null
           end_time?: string | null
           id?: number
@@ -59,7 +54,6 @@ export interface Database {
         }
         Update: {
           business_id?: number
-          created_at?: string | null
           description?: string | null
           end_time?: string | null
           id?: number
@@ -75,36 +69,19 @@ export interface Database {
       }
       reservations: {
         Row: {
-          created_at: string | null
           id: number
-          item_id: number | null
-          user_id: number | null
+          item_id: number
+          user_id: string
         }
         Insert: {
-          created_at?: string | null
           id?: number
-          item_id?: number | null
-          user_id?: number | null
+          item_id: number
+          user_id: string
         }
         Update: {
-          created_at?: string | null
           id?: number
-          item_id?: number | null
-          user_id?: number | null
-        }
-      }
-      users: {
-        Row: {
-          created_at: string | null
-          id: number
-        }
-        Insert: {
-          created_at?: string | null
-          id?: number
-        }
-        Update: {
-          created_at?: string | null
-          id?: number
+          item_id?: number
+          user_id?: string
         }
       }
     }
@@ -127,7 +104,6 @@ export type Item = Database["public"]["Tables"]["items"]["Row"];
 
 export const SampleItem: Item = {
   id: 1,
-  created_at: null,
   name: "Cwason",
   business_id: 123,
   location: "Location blah", 
